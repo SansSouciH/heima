@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sky.mapper.EmployeeMapper">
 
-    <update id="update" parameterType="Employee">
+    <update id="update" parameterType="com.sky.entity.Employee">
         update employee
         <set>
             <if test="name != null">name = #{name},</if>
@@ -16,6 +16,7 @@
             <if test="updateUser != null">update_User = #{updateUser},</if>
             <if test="status != null">status = #{status},</if>
         </set>
+        where id = #{id}
     </update>
 
     <select id="pageQuery" resultType="com.sky.entity.Employee">
@@ -25,5 +26,8 @@
                 and name like concat('%', #{name}, '%')
             </if>
         </where>
+    </select>
+    <select id="getEmployeeById" resultType="com.sky.entity.Employee" parameterType="java.lang.Long">
+        select * from employee where id = #{id}
     </select>
 </mapper>
