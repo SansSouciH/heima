@@ -1,0 +1,33 @@
+services:
+  mongo:
+    image: mongo:4.2
+    container_name: yapi-mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongo-data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: yapi
+
+  yapi:
+    image: jayfong/yapi:latest
+    container_name: yapi-web
+    restart: always
+    depends_on:
+      - mongo
+    ports:
+      - "3000:3000"
+    environment:
+      - YAPI_ADMIN_ACCOUNT=admin@admin.com
+      - YAPI_ADMIN_PASSWORD=ymfe.org
+      - YAPI_CLOSE_REGISTER=false
+      - YAPI_DB_SERVERNAME=yapi-mongo
+      - YAPI_DB_PORT=27017
+      - YAPI_DB_DATABASE=yapi
+    volumes:
+      - yapi-data:/yapi/vendors
+
+volumes:
+  mongo-data:
+  yapi-data:

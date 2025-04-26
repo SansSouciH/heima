@@ -1,14 +1,12 @@
 package com.sky.aspect;
 
 
-import com.sky.anno.AutoFill;
+import com.sky.annotation.AutoFill;
 import com.sky.constant.AutoFillConstant;
 import com.sky.context.BaseContext;
 import com.sky.enumeration.OperationType;
-import io.jsonwebtoken.lang.Collections;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -17,15 +15,13 @@ import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.Objects;
 
 @Slf4j
 @Aspect   // @Pointcut、@Before、@After、@Around
 @Component
 public class AutoFillAspect {
 
-    @Pointcut("execution(* com.sky.mapper.*.*(..)) && @annotation(com.sky.anno.AutoFill)")
+    @Pointcut("execution(* com.sky.mapper.*.*(..)) && @annotation(com.sky.annotation.AutoFill)")
     public void autoFillPointCut() {
         // * com.sky.mapper.*.*(..)：匹配所有返回值 + mapper包下所有类的所有方法，且参数可以是任意类型、任意个数
     }

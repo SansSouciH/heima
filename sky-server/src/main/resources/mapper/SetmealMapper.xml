@@ -2,6 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sky.mapper.SetmealMapper">
+    <insert id="insert" parameterType="com.sky.entity.Setmeal">
+
+    </insert>
 
 
     <update id="update" parameterType="com.sky.entity.Setmeal">
@@ -18,4 +21,26 @@
         </set>
         where id=#{id};
     </update>
+    <update id="pageQuery" parameterType="com.sky.dto.SetmealPageQueryDTO">
+
+    </update>
+    <delete id="deleteById" parameterType="java.lang.Long">
+
+    </delete>
+    <select id="countByCategoryId" resultType="java.lang.Integer" parameterType="java.lang.Long">
+
+    </select>
+    <select id="getById" resultType="com.sky.entity.Setmeal" parameterType="java.lang.Long">
+
+    </select>
+    <select id="list" resultType="com.sky.entity.Setmeal" parameterType="com.sky.entity.Setmeal">
+
+    </select>
+    <select id="getDishItemBySetmealId" resultType="com.sky.vo.DishItemVO" parameterType="java.lang.Long">
+
+
+    </select>
+    <select id="countByMap" resultType="java.lang.Integer" parameterType="java.util.Map">
+
+    </select>
 </mapper>

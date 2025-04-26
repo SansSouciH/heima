@@ -51,6 +51,7 @@ public class DishController {
     @DeleteMapping
     @ApiOperation("菜品批量删除")
     public Result delete(@RequestParam List<Long> ids) {
+        log.info("菜品批量删除：{}", ids);
         dishService.deleteBatch(ids);
         clearCache("dish_*");
         return Result.success();
@@ -60,6 +61,7 @@ public class DishController {
     @GetMapping("/{id}")
     @ApiOperation("根据id查询菜品")
     public Result<DishVO> getById(@PathVariable Long id) {
+        log.info("根据id查询菜品：{}", id);
         DishVO dishVO = dishService.getByIdWithFlavor(id);
         return Result.success(dishVO);
     }
@@ -67,6 +69,7 @@ public class DishController {
     @GetMapping("/list")
     @ApiOperation("根据分类id查询菜品")
     public Result<List<Dish>> list(Long categoryId) {
+        log.info("根据分类id查询菜品：{}", categoryId);
         List<Dish> list = dishService.list(categoryId);
         return Result.success(list);
     }
@@ -75,6 +78,7 @@ public class DishController {
     @PutMapping
     @ApiOperation("修改菜品")
     public Result update(@RequestBody DishDTO dishDTO) {
+        log.info("修改菜品：{}", dishDTO);
         dishService.updateWithFlavor(dishDTO);
         clearCache("dish_*");
         return Result.success();
@@ -83,12 +87,14 @@ public class DishController {
     @ApiOperation("菜品起售停售")
     @PostMapping("/status/{status}")
     public Result startOrStop(@PathVariable Integer status, Long id) {
+        log.info("菜品起售停售：{},{}", status, id);
         dishService.startOrStop(status, id);
         clearCache("dish_*");
         return Result.success();
     }
 
     private void clearCache(String pattern) {
+        log.info("==========清除缓存==========");
         Set keys = redisTemplate.keys(pattern);
         redisTemplate.delete(keys);
     }

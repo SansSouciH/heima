@@ -26,7 +26,7 @@ import java.util.Map;
 public class HttpClientUtil {
 
     static final  int TIMEOUT_MSEC = 5 * 1000;
-
+//请求行、请求头、请求体；
     /**
      * 发送GET方式请求
      * @param url
